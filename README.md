@@ -4,7 +4,7 @@ Android sample application to show possibilities of Quasar Framework.
 
 Tools:
 * Vue.js
-* Quasar Framework
+* Quasar Framework v0.15.10
 * Apache Cordova
 * Firebase Database
 
@@ -17,10 +17,9 @@ These instructions will get you a copy of the project up and running on your loc
 Node.js v8.9.0 or higher and NPM v5 or higher required.
 
 ```
+# make sure you have vue-cli and quasar-cli globally installed
 $ npm install -g vue-cli
-```
 
-```
 $ npm install -g quasar-cli
 ```
 

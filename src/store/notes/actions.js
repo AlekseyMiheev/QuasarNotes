@@ -21,3 +21,11 @@ export const toggleFavorite = (state) => {
 export const setNotes = (state, notes) => {
   state.commit('SET_NOTES', notes)
 }
+
+export const saveToStorage = (state) => {
+  state.commit('SAVE_TO_STORAGE')
+}
+
+export const restoreFromStorage = (state) => {
+  state.commit('RESTORE_FROM_STORAGE')
+}

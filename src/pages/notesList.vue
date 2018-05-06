@@ -4,12 +4,12 @@
       <q-autocomplete @search="search" @selected="selected" />
     </q-search>
     <q-btn-group v-if="$q.platform.is.mobile">
-      <q-btn push color="secondary" @click="saveToStorage(key, notes)">Save to File</q-btn>
-      <q-btn push color="secondary" @click="loadFromStorage(key)">Load from File</q-btn>
+      <q-btn push color="secondary" @click="saveToStorage()">Save to File</q-btn>
+      <q-btn push color="secondary" @click="loadFromStorage()">Load from File</q-btn>
     </q-btn-group>
     <q-btn-group v-else>
-      <q-btn push color="secondary" @click="saveToStorage(key, notes)">Save to LocalStorage</q-btn>
-      <q-btn push color="secondary" @click="loadFromStorage(key)">Load from LocalStorage</q-btn>
+      <q-btn push color="secondary" @click="saveToStorage()">Save to LocalStorage</q-btn>
+      <q-btn push color="secondary" @click="loadFromStorage()">Load from LocalStorage</q-btn>
     </q-btn-group>
     <q-tabs v-model="selectedTab" inverted color="secondary" align="justify">
       <q-tab default v-ripple name="all" slot="title" icon="note" label="All" />
@@ -99,13 +99,11 @@ export default {
       this.$store.dispatch('notes/addNote')
       this.$router.push('/notes')
     },
-    saveToStorage (key, value) {
-      console.log(key)
-      console.log(value)
-      this.$q.localStorage.set(key, value)
+    saveToStorage () {
+      this.$store.dispatch('notes/saveToStorage')
     },
-    loadFromStorage (key) {
-      this.$store.dispatch('notes/setNotes', this.$q.localStorage.get.item(key))
+    loadFromStorage () {
+      this.$store.dispatch('notes/restoreFromStorage')
     }
     /* updateActiveNote (val) {
       this.$store.commit('notes/SET_ACTIVE_NOTE', val)
@@ -116,10 +114,10 @@ export default {
     } */
   },
   created () {
-    this.loadFromStorage(this.key)
+    this.loadFromStorage()
   },
   beforeDestroyed () {
-    this.saveToStorage(this.key, this.notes)
+    this.saveToStorage()
   }
 }
 </script>

@@ -34,3 +34,14 @@ export const SET_NOTES = (state, notes) => {
   state.notes = notes
   state.activeNote = state.notes[0]
 }
+
+import { LocalStorage } from 'quasar'
+let key = 'state'
+
+export const SAVE_TO_STORAGE = (state) => {
+  LocalStorage.set(key, state)
+}
+
+export const RESTORE_FROM_STORAGE = (state) => {
+  Object.assign(state, LocalStorage.get.item(key))
+}

@@ -1,17 +1,9 @@
 <template>
   <q-layout>
   <q-pull-to-refresh :handler="refresher">
-    <q-search v-model="terms" placeholder="Start typing a title">
+    <q-search style="margin: 10px" v-model="terms" placeholder="Start typing a title">
       <q-autocomplete @search="search" @selected="selected" />
     </q-search>
-    <q-btn-group v-if="$q.platform.is.mobile" style="margin: 10px">
-      <q-btn push color="secondary" @click="saveToStorage()">Save to File</q-btn>
-      <q-btn push color="secondary" @click="loadFromStorage()">Load from File</q-btn>
-    </q-btn-group>
-    <q-btn-group v-else>
-      <q-btn push color="secondary" @click="saveToStorage()">Save to LocalStorage</q-btn>
-      <q-btn push color="secondary" @click="loadFromStorage()">Load from LocalStorage</q-btn>
-    </q-btn-group>
     <q-tabs v-model="selectedTab" inverted color="secondary" align="justify">
       <q-tab default v-ripple name="all" slot="title" icon="note" label="All" />
       <q-tab v-ripple name="favorite" slot="title" icon="favorite" label="Favorite" />

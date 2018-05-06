@@ -78,11 +78,13 @@ module.exports = function (ctx) {
         'QAutocomplete',
         'QSearch',
         'QBtnGroup',
-        'QPullToRefresh'
+        'QPullToRefresh',
+        'QPopover'
       ],
       directives: [
         'Ripple',
-        'GoBack'
+        'GoBack',
+        'CloseOverlay'
       ],
       // Quasar plugins
       plugins: [

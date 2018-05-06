@@ -1,7 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <img alt="Quasar logo" src="~assets/quasar-logo-full.svg">
-    <q-btn push rounded color="primary" label="Begin" @click="$router.push('/view')" />
+    <img alt="Quasar logo" src="~assets/quasar-logo-full.svg" @click="$router.push('/view')">
   </q-page>
 </template>
 

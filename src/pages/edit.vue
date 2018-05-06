@@ -13,7 +13,7 @@
       size="20px"
       icon="save"
       color="secondary"
-      @click="$store.dispatch('notes/saveToStorage')"
+      @click="$store.dispatch('notes/saveToStorage', $db)"
       v-go-back="'/view'">
     </q-btn>
   </q-page-sticky>

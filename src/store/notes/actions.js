@@ -22,8 +22,17 @@ export const setNotes = (state, notes) => {
   state.commit('SET_NOTES', notes)
 }
 
-export const saveToStorage = (state) => {
+export const saveToFirebase = (state, db) => {
+  state.commit('SAVE_TO_FBDB', db)
+}
+
+export const loadFromFirebase = (state, db) => {
+  state.commit('LOAD_FROM_FBDB', db)
+}
+
+export const saveToStorage = (state, db) => {
   state.commit('SAVE_TO_STORAGE')
+  this.saveToFirebase(state, db)
 }
 
 export const restoreFromStorage = (state) => {

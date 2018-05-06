@@ -5,7 +5,7 @@ export const ADD_NOTE = (state) => {
     text: '',
     favorite: false
   }
-  newNote.id = state.notes.length + 1
+  newNote.id = state.notes.length
   state.notes.push(newNote)
   state.activeNote = newNote
 }
@@ -20,6 +20,9 @@ export const DELETE_NOTE = (state, note) => {
   if (index !== -1) {
     state.notes.splice(index, 1)
   }
+  state.notes.forEach((item, i) => {
+    item.id = i
+  })
 }
 
 export const TOGGLE_FAVORITE = (state) => {
@@ -44,4 +47,15 @@ export const SAVE_TO_STORAGE = (state) => {
 
 export const RESTORE_FROM_STORAGE = (state) => {
   Object.assign(state, LocalStorage.get.item(key))
+}
+
+export const SAVE_TO_FBDB = (state, db) => {
+  db.ref('state').set(state)
+  db.ref('notes').set(state.notes)
+}
+
+export const LOAD_FROM_FBDB = (state, db) => {
+  db.ref('state').on('value', function (st) {
+    Object.assign(state, st.val())
+  })
 }

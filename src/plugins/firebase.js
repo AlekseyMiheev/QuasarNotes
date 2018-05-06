@@ -11,11 +11,7 @@ var config = {
 
 const connection = Firebase.initializeApp(config)
 const DB = connection.database()
-const usersRef = DB.ref('Notes')
-console.log(usersRef)
 
-export default ({ Vue }) => {
-  Vue.prototype.$db = usersRef
+export default ({ app, router, store, Vue }) => {
+  Vue.prototype.$db = DB
 }
-
-export { DB }

@@ -95,12 +95,11 @@ export default {
       this.$router.push('/notes')
     },
     addNote () {
-      console.log(this.$store)
       this.$store.dispatch('notes/addNote')
       this.$router.push('/notes')
     },
     saveToStorage () {
-      this.$store.dispatch('notes/saveToStorage')
+      this.$store.dispatch('notes/saveToStorage', this.$db)
     },
     loadFromStorage () {
       this.$store.dispatch('notes/restoreFromStorage')

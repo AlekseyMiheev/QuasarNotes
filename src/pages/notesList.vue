@@ -90,10 +90,15 @@ export default {
   },
   methods: {
     search (terms, done) {
-      done(filter(terms, {field: 'title', list: this.notes}))
+      let list = []
+      this.notes.forEach((item) => {
+        let obj = {value: item, label: item.title}
+        list.push(obj)
+      })
+      done(filter(terms, {field: 'label', list: list}))
     },
-    selected (note) {
-      this.$store.dispatch('notes/setAcitveNote', note)
+    selected (obj) {
+      this.$store.dispatch('notes/setActiveNote', obj.value)
       this.$router.push('/notes')
     },
     addNote () {

@@ -77,7 +77,8 @@ module.exports = function (ctx) {
         'QInput',
         'QAutocomplete',
         'QSearch',
-        'QBtnGroup'
+        'QBtnGroup',
+        'QPullToRefresh'
       ],
       directives: [
         'Ripple',

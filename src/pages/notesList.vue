@@ -1,9 +1,10 @@
 <template>
   <q-layout>
+  <q-pull-to-refresh :handler="refresher">
     <q-search v-model="terms" placeholder="Start typing a title">
       <q-autocomplete @search="search" @selected="selected" />
     </q-search>
-    <q-btn-group v-if="$q.platform.is.mobile">
+    <q-btn-group v-if="$q.platform.is.mobile" style="margin: 10px">
       <q-btn push color="secondary" @click="saveToStorage()">Save to File</q-btn>
       <q-btn push color="secondary" @click="loadFromStorage()">Load from File</q-btn>
     </q-btn-group>
@@ -49,16 +50,17 @@
           </q-card-actions>
         </q-card> -->
       </q-tab-pane>
-      <q-page-sticky position="bottom-right" :offset="[18, 18]">
-        <q-btn round
-          size="20px"
-          icon="add"
-          color="secondary"
-          @click="addNote"
-        >
-        </q-btn>
-      </q-page-sticky>
     </q-tabs>
+  </q-pull-to-refresh>
+    <q-page-sticky position="bottom-right" :offset="[18, 18]">
+      <q-btn round
+        size="20px"
+        icon="add"
+        color="secondary"
+        @click="addNote"
+      >
+      </q-btn>
+    </q-page-sticky>
   </q-layout>
 </template>
 
@@ -103,6 +105,10 @@ export default {
     },
     loadFromStorage () {
       this.$store.dispatch('notes/restoreFromStorage')
+    },
+    refresher (done) {
+      this.$store.dispatch('notes/loadFromFirebase', this.$db)
+      done()
     }
     /* updateActiveNote (val) {
       this.$store.commit('notes/SET_ACTIVE_NOTE', val)

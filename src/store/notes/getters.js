@@ -1,4 +1,5 @@
 export const getActiveNoteText = (state) => {
+  console.log(state.activeNote.text)
   return state.activeNote.text
 }
 

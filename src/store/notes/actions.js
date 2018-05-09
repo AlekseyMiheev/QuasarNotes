@@ -2,8 +2,9 @@ export const addNote = (state) => {
   state.commit('ADD_NOTE')
 }
 
-export const editNote = (state, e) => {
-  state.commit('EDIT_NOTE', e.target.value)
+export const editNote = (state, note) => {
+  console.log('editNote')
+  state.commit('EDIT_NOTE', note)
 }
 
 export const deleteNote = (state, note) => {
@@ -23,18 +24,28 @@ export const setNotes = (state, notes) => {
 }
 
 export const saveToFirebase = (state, db) => {
-  state.commit('SAVE_TO_FBDB', db)
+  let stateToSave = {}
+  stateToSave.notes = state.state.notes
+  stateToSave.activeNote = state.state.activeNote
+  db.ref('state').set(stateToSave)
+  db.ref('notes').set(stateToSave.notes)
 }
 
 export const loadFromFirebase = (state, db) => {
-  state.commit('LOAD_FROM_FBDB', db)
+  db.ref('state').on('value', function (st) {
+    state.commit('SET_STATE', st.val())
+  })
 }
 
+import { LocalStorage } from 'quasar'
+let key = 'state'
+
 export const saveToStorage = (state, db) => {
-  state.commit('SAVE_TO_STORAGE')
+  LocalStorage.set(key, state.state)
   this.saveToFirebase(state, db)
 }
 
 export const restoreFromStorage = (state) => {
-  state.commit('RESTORE_FROM_STORAGE')
+  let newState = LocalStorage.get.item(key)
+  state.commit('SET_STATE', newState)
 }

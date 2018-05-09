@@ -25,9 +25,10 @@ export default {
   computed: {
     activeNote: {
       get () {
-        return this.$store.state.notes.activeNote
+        return this.$store.getters['notes/getActiveNote']
       },
       set (val) {
+        console.log(val)
         this.$store.dispatch('notes/editNote', val)
       }
     }

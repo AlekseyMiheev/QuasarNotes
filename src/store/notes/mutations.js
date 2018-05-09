@@ -8,6 +8,7 @@ export const ADD_NOTE = (state) => {
   newNote.id = state.notes.length
   state.notes.push(newNote)
   state.activeNote = newNote
+  console.log(state)
 }
 
 export const EDIT_NOTE = (state, note) => {
@@ -38,24 +39,6 @@ export const SET_NOTES = (state, notes) => {
   state.activeNote = state.notes[0]
 }
 
-import { LocalStorage } from 'quasar'
-let key = 'state'
-
-export const SAVE_TO_STORAGE = (state) => {
-  LocalStorage.set(key, state)
-}
-
-export const RESTORE_FROM_STORAGE = (state) => {
-  Object.assign(state, LocalStorage.get.item(key))
-}
-
-export const SAVE_TO_FBDB = (state, db) => {
-  db.ref('state').set(state)
-  db.ref('notes').set(state.notes)
-}
-
-export const LOAD_FROM_FBDB = (state, db) => {
-  db.ref('state').on('value', function (st) {
-    Object.assign(state, st.val())
-  })
+export const SET_STATE = (state, newState) => {
+  state = Object.assign(state, newState)
 }
